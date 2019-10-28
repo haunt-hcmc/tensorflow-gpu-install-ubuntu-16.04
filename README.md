@@ -88,7 +88,7 @@ sudo dpkg -i ./cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-get update
 sudo apt-get install cuda-9-0   
 ```    
-If display error:
+If the system encounters a conflict, an error is displayed during the installation process as follow:
 
 ```
 dpkg: error processing archive cuda-repo-ubuntu1604_9.0.176-1_amd64.deb (--install):
@@ -96,7 +96,7 @@ dpkg: error processing archive cuda-repo-ubuntu1604_9.0.176-1_amd64.deb (--insta
 Errors were encountered while processing:
  cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 ```
-You can fix error the line following below: 
+You can fix error the following: 
 
 Code: `dpkg --print-architecture` will show the architecture dpkg is willing to install packages for 
 
