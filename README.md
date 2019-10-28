@@ -88,6 +88,17 @@ sudo dpkg -i ./cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-get update
 sudo apt-get install cuda-9-0   
 ```    
+### Error:
+```
+The following packages have unmet dependencies:
+ cuda-9-0:amd64 : Depends: cuda-toolkit-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+                  Depends: cuda-runtime-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+                  Depends: cuda-demo-suite-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.
+```
+
+---
+
 If the system encounters a conflict, an error is displayed during the installation process as follow:
 
 ```
