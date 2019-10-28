@@ -83,10 +83,28 @@ sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/
 # install actual package
 sudo dpkg -i ./cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 
+
 #  install cuda (but it'll prompt to install other deps, so we try to install twice with a dep update in between
 sudo apt-get update
 sudo apt-get install cuda-9-0   
 ```    
+If display error:
+
+```
+dpkg: error processing archive cuda-repo-ubuntu1604_9.0.176-1_amd64.deb (--install):
+ package architecture (amd64) does not match system (i386)
+Errors were encountered while processing:
+ cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+```
+You can fix error the line following below: 
+
+Code: `dpkg --print-architecture` will show the architecture dpkg is willing to install packages for 
+
+If the architecture `amd64` is not listed, an amd package will be refused, even if all else seems fine. Now Can try to add it by
+
+```
+dpkg --add-architecture amd64
+```
 
 2a. reboot Ubuntu
 ```bash
