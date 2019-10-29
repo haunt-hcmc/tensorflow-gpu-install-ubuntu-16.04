@@ -90,7 +90,7 @@ sudo apt-get install cuda-9-0
 ```    
 ### Error if the OS task processing on 32bit:
 
-If the system encounters a conflict, an error is displayed during the installation process as follow:
+1. If the system encounters a conflict, an error is displayed during the installation process as follow:
 
 ```
 dpkg: error processing archive cuda-repo-ubuntu1604_9.0.176-1_amd64.deb (--install):
@@ -110,7 +110,7 @@ dpkg --add-architecture amd64
 
 ---
 
-Error the following below:
+2. Error after finished installing Cuda 9.0:
 
 ```
 The following packages have unmet dependencies:
