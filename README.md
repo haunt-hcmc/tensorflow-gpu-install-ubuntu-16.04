@@ -88,7 +88,8 @@ sudo dpkg -i ./cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
 sudo apt-get update
 sudo apt-get install cuda-9-0   
 ```    
-### Error if the OS processing on 32bit:
+### Error if the OS task processing on 32bit:
+
 ```
 The following packages have unmet dependencies:
  cuda-9-0:amd64 : Depends: cuda-toolkit-9-0:amd64 (>= 9.0.176) but it is not going to be installed
