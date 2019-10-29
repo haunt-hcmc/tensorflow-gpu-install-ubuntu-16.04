@@ -90,16 +90,6 @@ sudo apt-get install cuda-9-0
 ```    
 ### Error if the OS task processing on 32bit:
 
-```
-The following packages have unmet dependencies:
- cuda-9-0:amd64 : Depends: cuda-toolkit-9-0:amd64 (>= 9.0.176) but it is not going to be installed
-                  Depends: cuda-runtime-9-0:amd64 (>= 9.0.176) but it is not going to be installed
-                  Depends: cuda-demo-suite-9-0:amd64 (>= 9.0.176) but it is not going to be installed
-E: Unable to correct problems, you have held broken packages.
-```
-
----
-
 If the system encounters a conflict, an error is displayed during the installation process as follow:
 
 ```
@@ -117,6 +107,20 @@ If the architecture `amd64` is not listed, an amd package will be refused, even 
 ```
 dpkg --add-architecture amd64
 ```
+
+---
+
+Error the following below:
+
+```
+The following packages have unmet dependencies:
+ cuda-9-0:amd64 : Depends: cuda-toolkit-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+                  Depends: cuda-runtime-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+                  Depends: cuda-demo-suite-9-0:amd64 (>= 9.0.176) but it is not going to be installed
+E: Unable to correct problems, you have held broken packages.
+```
+
+Solution: Reinstalling Ubuntu OS 16.04 (64 bit)
 
 2a. reboot Ubuntu
 ```bash
