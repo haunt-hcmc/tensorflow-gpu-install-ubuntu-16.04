@@ -135,7 +135,101 @@ nvidia-smi
 # if not, the previous steps failed.   
 ``` 
 
-3. Install cudnn 
+### Validation Error:
+##### Code Error: `nvidia-smi: command not found`
+##### Resolve: 
+###### Method 1:
++ Download [Anaconda](https://www.anaconda.com/download/#linux)
++ `bash ./Anaconda3-5.1.0-Linux-x86_64.sh`
++ Add anaconda installation path to .bashrc (env variable): `export PATH="$PATH:/home/[username/anaconda3/bin]"`
++ Load in terminal: `source ~/.bashrc`
++ Run Anaconda desktop: `anaconda-navigator`
++ Create Tensorflow-GPU:
+    ```
+    conda create -n tensorflow python=3.6
+    conda activate tensorflow
+    pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
+    conda install tensorflow-gpu
+    ```
++ Validation install of Tensorflow:
+   
+   
+   ```py
+   python
+   >>> import tensorflow.compat.v1 as tf
+   >>> tf.disable_v2_behavior
+   WARNING:tensorflow:From /home/haunt/anaconda3/envs/tensorflow/lib/python3.6/site-packages/tensorflow_core/python/compat/v2_compat.py:65: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+    Instructions for updating: 
+    non-resource variables are not supported in the long term
+   >>> hello  = tf.constant('Hello World!')
+   >>> sess = tf.Session()
+   >>> print(sess.run(hello))
+   b'Hello World'
+   ```
+###### Method 2:
+
+```
+sudo apt-get purge nvidia-*
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+sudo apt-cache search nvidia | grep -E “nvidia\-[0-9]{3}"
+```
+
+Output example:
+
+```sh
+nvidia-304-dev - NVIDIA binary Xorg driver development files
+nvidia-331 - Transitional package for nvidia-331
+nvidia-331-dev - Transitional package for nvidia-340-dev
+nvidia-331-updates - Transitional package for nvidia-340
+nvidia-331-updates-dev - Transitional package for nvidia-340-dev
+nvidia-331-updates-uvm - Transitional package for nvidia-340
+nvidia-331-uvm - Transitional package for nvidia-340
+nvidia-340-dev - NVIDIA binary Xorg driver development files
+nvidia-340-updates - Transitional package for nvidia-340
+nvidia-340-updates-dev - Transitional package for nvidia-340-dev
+nvidia-340-updates-uvm - Transitional package for nvidia-340-updates
+nvidia-340-uvm - Transitional package for nvidia-340
+nvidia-346 - Transitional package for nvidia-346
+nvidia-346-dev - Transitional package for nvidia-352-dev
+nvidia-346-updates - Transitional package for nvidia-346-updates
+nvidia-346-updates-dev - Transitional package for nvidia-352-updates-dev
+nvidia-352 - Transitional package for nvidia-361
+nvidia-352-dev - Transitional package for nvidia-361-dev
+nvidia-352-updates - Transitional package for nvidia-361
+nvidia-352-updates-dev - Transitional package for nvidia-361-dev
+nvidia-361-updates - Transitional package for nvidia-361
+nvidia-361-updates-dev - Transitional package for nvidia-361-dev
+nvidia-304-updates - Transitional package for nvidia-304
+nvidia-304-updates-dev - Transitional package for nvidia-304-dev
+nvidia-361 - Transitional package for nvidia-367
+nvidia-361-dev - Transitional package for nvidia-367-dev
+nvidia-367 - Transitional package for nvidia-375
+nvidia-367-dev - Transitional package for nvidia-375-dev
+nvidia-375 - Transitional package for nvidia-384
+nvidia-375-dev - Transitional package for nvidia-384-dev
+nvidia-384-dev - NVIDIA binary Xorg driver development files
+nvidia-304 - NVIDIA legacy binary driver - version 304.137
+nvidia-340 - NVIDIA binary driver - version 340.106
+nvidia-384 - NVIDIA binary driver - version 384.130
+nvidia-387-dev - Transitional package for nvidia-390-dev
+nvidia-387 - Transitional package for nvidia-390
+nvidia-390-dev - NVIDIA binary Xorg driver development files
+nvidia-390 - NVIDIA binary driver - version 390.48
+nvidia-396-dev - NVIDIA binary Xorg driver development files
+nvidia-396 - NVIDIA binary driver - version 396.18
+```
+
+```
+sudo apt-get install nvidia-390
+sudo reboot
+```
+
+###### Reboot error after finished installing Nvidia driver version 390
+###### Code Error: `dev-sda1: clean, xxxxx/xxxxxx files,xxxxx/xxxxx blocks`
+###### Resolve: _Reinstall Ubuntu OS amd64_
+
+~~3. Install cudnn~~
 
 ``` bash
 wget https://s3.amazonaws.com/open-source-william-falcon/cudnn-9.0-linux-x64-v7.3.1.20.tgz
@@ -145,19 +239,19 @@ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 ```    
 
-4. Add these lines to end of ~/.bashrc:   
+<del>4. Add these lines to end of ~/.bashrc:</del> 
 ``` bash
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
 export CUDA_HOME=/usr/local/cuda
 export PATH="$PATH:/usr/local/cuda/bin"
 ```   
 
-4a. Reload bashrc     
+~~4a. Reload bashrc~~     
 ``` bash 
 source ~/.bashrc
 ```   
 
-5. Install miniconda   
+~~5. Install miniconda~~   
 ``` bash
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh   
@@ -176,29 +270,29 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 ```   
 
-5a. Reload bashrc     
+~~5a. Reload bashrc~~     
 ``` bash 
 source ~/.bashrc
 ```   
 
-6. Create python 3.6 conda env to install tf   
+~~6. Create python 3.6 conda env to install tf~~   
 ``` bash
 conda create -n tensorflow python=3.6
 
 # press y a few times 
 ```   
 
-7. Activate env   
+~~7. Activate env~~  
 ``` bash
 source activate tensorflow   
 ```
 
-8. update pip (might already be up to date, but just in case...)
+~~8. update pip (might already be up to date, but just in case...)~~
 ```
 pip install --upgrade pip
 ```
 
-9. Install stable tensorflow with GPU support for python 3.6    
+~~9. Install stable tensorflow with GPU support for python 3.6~~    
 ``` bash
 pip install --upgrade tensorflow-gpu
 
@@ -206,7 +300,7 @@ pip install --upgrade tensorflow-gpu
 # pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.2.0-cp36-cp36m-linux_x86_64.whl
 ```   
 
-10. Test tf install   
+~~10. Test tf install~~  
 ``` bash
 # start python shell   
 python
